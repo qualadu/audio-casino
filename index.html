@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zufallsautomat</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Bebas+Neue&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div class="bulb-row" id="bulbRow" aria-hidden="true"></div>
+
+  <main class="stage">
+    <h1 class="marquee">Zufallsautomat</h1>
+    <p class="subtitle">Am Hebel ziehen &mdash; der Automat w&auml;hlt den Sound</p>
+
+    <div class="cabinet">
+      <div class="cabinet-plate">
+        <div class="reel-window" id="reelWindow" aria-live="polite">
+          <div class="reel" id="reel1"><span>&#127817;</span></div>
+          <div class="reel" id="reel2"><span>&#128142;</span></div>
+          <div class="reel" id="reel3"><span>&#127925;</span></div>
+        </div>
+        <p class="readout" id="readout">Bereit</p>
+      </div>
+
+      <button class="lever-assembly" id="leverBtn" type="button" aria-label="Hebel ziehen, um einen zuf&auml;lligen Sound abzuspielen">
+        <span class="lever-base"></span>
+        <span class="lever-arm" id="leverArm">
+          <span class="lever-rod"></span>
+          <span class="lever-knob"></span>
+        </span>
+      </button>
+    </div>
+
+    <p class="hint">Auf den Hebel klicken oder tippen &mdash; oder Leertaste / Enter dr&uuml;cken, wenn er fokussiert ist.</p>
+  </main>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
