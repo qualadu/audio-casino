@@ -101,7 +101,7 @@ function randomSound() {
 }
 
 function randomSymbolExcept() {
-  const pool = ["6️⃣", "⚅", "6️", "7️", "7️⃣"];
+  const pool = ["6️⃣", "⚅", "6️", "7️", "7️⃣", "⁶🤷‍♂️⁷"];
   return pool[Math.floor(Math.random() * pool.length)];
 }
 
