@@ -33,6 +33,7 @@ const reels      = [
 const bulbRow = document.getElementById("bulbRow");
 
 // Lichterkette erzeugen
+/* alte Lichterketten erzeugung
 const bulbs = [];
 
 function buildBulbs() {
@@ -47,7 +48,45 @@ function buildBulbs() {
     bulbRow.appendChild(b);
     bulbs.push(b);
   }
+}*/
+
+//neue Erzeugung
+
+const bulbs = [];
+
+const BULB_SIZE = 10;
+const BULB_MIN_GAP = 6;
+
+function calcBulbCount(width) {
+  return Math.floor(width / (BULB_SIZE + BULB_MIN_GAP));
 }
+
+function buildBulbs() {
+  const width = bulbRow.getBoundingClientRect().width;
+  const count = Math.max(8, calcBulbCount(width));
+
+  bulbRow.innerHTML = "";
+  bulbs.length = 0;
+
+  const frag = document.createDocumentFragment();
+
+  for (let i = 0; i < count; i++) {
+    const b = document.createElement("span");
+    b.className = "bulb";
+    frag.appendChild(b);
+    bulbs.push(b);
+  }
+
+  bulbRow.appendChild(frag);
+}
+
+buildBulbs();
+
+const resizeObserver = new ResizeObserver(() => {
+  buildBulbs();
+});
+
+resizeObserver.observe(document.body);
 
 window.addEventListener("resize", () => {
   buildBulbs();
