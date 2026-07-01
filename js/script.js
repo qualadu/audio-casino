@@ -7,11 +7,19 @@
  *   symbol -> Emoji/Zeichen für die Walzen
  */
 const SOUND_LIBRARY = [
-  { file: "audio/jackpot.wav",    label: "Jackpot!",        symbol: "⚡" },
-  { file: "audio/muenzregen.wav", label: "Münzregen",       symbol: "🥤" },
-  { file: "audio/glocke.wav",     label: "Glocke",          symbol: "🧊" },
-  { file: "audio/applaus.wav",    label: "Applaus",         symbol: "❄️" },
-  { file: "audio/niete.wav",      label: "Nochmal!",        symbol: "🔋" },
+  /* ##Testlibrary
+  { file: "audio/testlib/jackpot.wav",    label: "Jackpot!",        symbol: "⚡" },
+  { file: "audio/testlib/muenzregen.wav", label: "Münzregen",       symbol: "🥤" },
+  { file: "audio/testlib/glocke.wav",     label: "Glocke",          symbol: "🧊" },
+  { file: "audio/testlib/applaus.wav",    label: "Applaus",         symbol: "❄️" },
+  { file: "audio/testlib/niete.wav",      label: "Nochmal!",        symbol: "🔋" },
+  */
+  { file: "audio/bruahh_brrrh.mp3",      label: "🫧🫧🫧🫧",        symbol: "🫧" },
+  { file: "audio/bruahhh.mp3",           label: "🦴🦴🦴🦴",        symbol: "🦴" },
+  { file: "audio/chuhhp.mp3",            label: "🐽🐽🐽🐽",        symbol: "🐽" },
+  { file: "audio/huachp.mp3",            label: "😼😼😼😼",        symbol: "😼" },
+  { file: "audio/luuhhp.mp3",            label: "👣👣👣👣",        symbol: "👣" },
+  { file: "audio/phuph.mp3",             label: "💨💨💨💨",        symbol: "💨" },
 ];
 
 const leverBtn   = document.getElementById("leverBtn");
@@ -43,7 +51,7 @@ function randomSound() {
 }
 
 function randomSymbolExcept() {
-  const pool = ["🍒", "⭐", "💎", "🍋", "🔔", "7️⃣", "🎵"];
+  const pool = ["6️⃣", "⚅", "6️", "7️", "7️⃣"];
   return pool[Math.floor(Math.random() * pool.length)];
 }
 
