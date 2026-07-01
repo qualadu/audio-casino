@@ -33,14 +33,25 @@ const reels      = [
 const bulbRow = document.getElementById("bulbRow");
 
 // Lichterkette erzeugen
-const BULB_COUNT = 16;
 const bulbs = [];
-for (let i = 0; i < BULB_COUNT; i++) {
-  const b = document.createElement("span");
-  b.className = "bulb";
-  bulbRow.appendChild(b);
-  bulbs.push(b);
+
+function buildBulbs() {
+  bulbRow.innerHTML = "";
+  bulbs.length = 0;
+
+  const count = getBulbCount();
+
+  for (let i = 0; i < count; i++) {
+    const b = document.createElement("span");
+    b.className = "bulb";
+    bulbRow.appendChild(b);
+    bulbs.push(b);
+  }
 }
+
+window.addEventListener("resize", () => {
+  buildBulbs();
+});
 
 let isSpinning = false;
 let bulbTimer = null;
