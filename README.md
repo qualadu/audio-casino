@@ -54,4 +54,4 @@ entsprechenden Objekt-Eintrag löschen und die zugehörige Datei bei Bedarf aus
 
 ## Lizenz
 
-Ich stelle alles, </b> ausser die mp3-Dateien im Ordner audio </b> zur freien Verfügung.
+Ich stelle alles, **ausser die mp3-Dateien im Ordner audio**, zur freien Verfügung.
