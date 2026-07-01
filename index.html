@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+  <!DOCTYPE html>
 <html lang="de">
 <head>
 <meta charset="UTF-8">
@@ -15,30 +15,35 @@
 
   <main class="stage">
     <h1 class="marquee">SOUND GAMBLING</h1>
-    <p class="subtitle">Was sind das wohl für sounds?/p>
+    <p class="subtitle">Was sind das wohl für sounds?</p>
 
-    <div class="cabinet">
-      <div class="cabinet-plate">
-        <div class="reel-window" id="reelWindow" aria-live="polite">
-          <div class="reel" id="reel1"><span>&#127817;</span></div>
-          <div class="reel" id="reel2"><span>&#128142;</span></div>
-          <div class="reel" id="reel3"><span>&#127925;</span></div>
+    <div class="bottom-panel">
+      <div class="cabinet">
+        <div class="cabinet-plate">
+          <div class="reel-window" id="reelWindow" aria-live="polite">
+            <div class="reel" id="reel1"><span>&#9889;</span></div>
+            <div class="reel" id="reel2"><span>&#129544;</span></div>
+            <div class="reel" id="reel3"><span>&#10052;&#65039;</span></div>
+          </div>
+          <p class="readout" id="readout">Bereit</p>
         </div>
-        <p class="readout" id="readout">Bereit</p>
+
+        <button class="lever-assembly" id="leverBtn" type="button" aria-label="Hebel ziehen, um einen zuf&auml;lligen Sound abzuspielen">
+          <span class="lever-base"></span>
+          <span class="lever-arm" id="leverArm">
+            <span class="lever-rod"></span>
+            <span class="lever-knob"></span>
+          </span>
+        </button>
       </div>
 
-      <button class="lever-assembly" id="leverBtn" type="button" aria-label="Hebel ziehen, um einen zuf&auml;lligen Sound abzuspielen">
-        <span class="lever-base"></span>
-        <span class="lever-arm" id="leverArm">
-          <span class="lever-rod"></span>
-          <span class="lever-knob"></span>
-        </span>
-      </button>
+      <p class="hint">Probiers doch 6 - 7 mol us ⁶🤷‍♂️⁷</p>
     </div>
-
-    <p class="hint">Probiers doch 6 - 7 mol us ⁶🤷‍♂️⁷</p>
   </main>
 
+  <script src="js/script.js"></script>
+</body>
+</html>
   <script src="js/script.js"></script>
 </body>
 </html>
