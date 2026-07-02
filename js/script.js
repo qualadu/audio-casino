@@ -30,17 +30,77 @@ const reels      = [
   document.getElementById("reel2"),
   document.getElementById("reel3"),
 ];
+
+const START_COMBINATION = ["6️⃣", "7️⃣", "⁶🤷‍♂️⁷"];
+
+function initReels() {
+  reels.forEach((reel, idx) => {
+    const span = reel.querySelector("span");
+    span.textContent = START_COMBINATION[idx];
+  });
+}
+
 const bulbRow = document.getElementById("bulbRow");
 
 // Lichterkette erzeugen
-const BULB_COUNT = 16;
+/* alte Lichterketten erzeugung
 const bulbs = [];
-for (let i = 0; i < BULB_COUNT; i++) {
-  const b = document.createElement("span");
-  b.className = "bulb";
-  bulbRow.appendChild(b);
-  bulbs.push(b);
+
+function buildBulbs() {
+  bulbRow.innerHTML = "";
+  bulbs.length = 0;
+
+  const count = getBulbCount();
+
+  for (let i = 0; i < count; i++) {
+    const b = document.createElement("span");
+    b.className = "bulb";
+    bulbRow.appendChild(b);
+    bulbs.push(b);
+  }
+}*/
+
+//neue Erzeugung
+
+const bulbs = [];
+
+const BULB_SIZE = 10;
+const BULB_MIN_GAP = 6;
+
+function calcBulbCount(width) {
+  return Math.floor(width / (BULB_SIZE + BULB_MIN_GAP));
 }
+
+function buildBulbs() {
+  const width = bulbRow.getBoundingClientRect().width;
+  const count = Math.max(8, calcBulbCount(width));
+
+  bulbRow.innerHTML = "";
+  bulbs.length = 0;
+
+  const frag = document.createDocumentFragment();
+
+  for (let i = 0; i < count; i++) {
+    const b = document.createElement("span");
+    b.className = "bulb";
+    frag.appendChild(b);
+    bulbs.push(b);
+  }
+
+  bulbRow.appendChild(frag);
+}
+
+buildBulbs();
+
+const resizeObserver = new ResizeObserver(() => {
+  buildBulbs();
+});
+
+resizeObserver.observe(document.body);
+
+window.addEventListener("resize", () => {
+  buildBulbs();
+});
 
 let isSpinning = false;
 let bulbTimer = null;
@@ -51,7 +111,7 @@ function randomSound() {
 }
 
 function randomSymbolExcept() {
-  const pool = ["6️⃣", "⚅", "6️", "7️", "7️⃣"];
+  const pool = ["6️⃣", "⚅", "6️", "7️", "7️⃣", "⁶🤷‍♂️⁷"];
   return pool[Math.floor(Math.random() * pool.length)];
 }
 
@@ -123,3 +183,5 @@ leverBtn.addEventListener("keydown", (e) => {
     pullLever();
   }
 });
+
+window.addEventListener("DOMContentLoaded", initReels);
