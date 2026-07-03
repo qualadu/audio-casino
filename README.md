@@ -1,4 +1,4 @@
-# 🎰 Audio Casino <2> Version 2.02 </h2>
+# 🎰 Audio Casino <h2> Version 2.02 </h2>
 
 An interactive slot machine that plays a random audio clip every time you pull the lever.
 
