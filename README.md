@@ -73,7 +73,7 @@ The source code may be freely used, modified, and incorporated into your own pro
 #### Improvements:
 - Added responsive scaling so the slot machine automatically adapts to different screen sizes and device resolutions.
 - Improved the overall layout for desktop and mobile devices.
-#### JS:
+#### JavaScript:
 - Reworked the reel logic so the slots now perform an actual spinning animation instead of instantly changing symbols.
 - Improved the randomness and timing of the reel stopping sequence for a more authentic slot machine experience.
 
@@ -102,7 +102,7 @@ Firt comlpete release of the **Audio Casino**
 ### Version 1.00
 Initial prototype
 
-#### Geatures
+#### Features
 - Simple embedded audio player
 - Supports playing, pausing and downlading a single audio file
 - Github Page compatible implementation that envolved into the Audio Casino project.
