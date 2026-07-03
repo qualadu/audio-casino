@@ -1,5 +1,5 @@
 # 🎰 Audio Casino 
-> Current Version: **2.02**
+> Current Version: **2.2**
 
 An interactive slot machine that plays a random audio clip every time you pull the lever.
 
@@ -68,7 +68,7 @@ The source code may be freely used, modified, and incorporated into your own pro
 > Audio files (including MP3 files and externally sourced audio referenced in SOUND_LIBRARY) are not covered by this permission. Unless explicitly stated otherwise, they remain the property of their respective copyright holders and may not be redistributed, modified, or included in third-party projects without permission.
 
 ## Version History
-### Version 2.02
+### Version 2.2
 #### Improvements:
 - Added responsive scaling so the slot machine automatically adapts to different screen sizes and device resolutions.
 - Improved the overall layout for desktop and mobile devices.
@@ -76,7 +76,7 @@ The source code may be freely used, modified, and incorporated into your own pro
 - Reworked the reel logic so the slots now perform an actual spinning animation instead of instantly changing symbols.
 - Improved the randomness and timing of the reel stopping sequence for a more authentic slot machine experience.
 
-### Version 2.01
+### Version 2.1
 #### Visual Improvements: 
 - Added an icy chrome finish to better match the overall background theme.
 - Introduced a decorative string of lights spanning the entire width of the machine.
@@ -87,7 +87,7 @@ The source code may be freely used, modified, and incorporated into your own pro
 #### Audio: 
 - Expanded the sound library with additional random sound effects sourced from the web.
 
-### Version 2.00
+### Version 2.0
 Firt comlpete release of the **Audio Casino**
 #### Features
 - Interactive slot machine with three spinning reels.
@@ -97,7 +97,7 @@ Firt comlpete release of the **Audio Casino**
 - Fully customizable sound library through the SOUND_LIBRARY array.
 
 
-### Version 1.00
+### Version 1.0
 Initial prototype
 #### Features
 - Simple embedded audio player
