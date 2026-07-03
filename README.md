@@ -68,7 +68,6 @@ The source code may be freely used, modified, and incorporated into your own pro
 > Audio files (including MP3 files and externally sourced audio referenced in SOUND_LIBRARY) are not covered by this permission. Unless explicitly stated otherwise, they remain the property of their respective copyright holders and may not be redistributed, modified, or included in third-party projects without permission.
 
 ## Version History
-
 ### Version 2.02
 #### Improvements:
 - Added responsive scaling so the slot machine automatically adapts to different screen sizes and device resolutions.
@@ -90,7 +89,6 @@ The source code may be freely used, modified, and incorporated into your own pro
 
 ### Version 2.00
 Firt comlpete release of the **Audio Casino**
-
 #### Features
 - Interactive slot machine with three spinning reels.
 - Pulling the lever randomly selects and plays one sound from the sound library.
@@ -101,7 +99,6 @@ Firt comlpete release of the **Audio Casino**
 
 ### Version 1.00
 Initial prototype
-
 #### Features
 - Simple embedded audio player
 - Supports playing, pausing and downlading a single audio file
