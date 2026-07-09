@@ -7,11 +7,15 @@ Each sound is represented by its own unique emoji, making it easy to identify th
 
 ## Usage
 
-Using the Audio Casino couldn't be easier:
+Using **Audio Casino** couldn't be easier:
 
-1. Turn your speakers or headphones up to the full volume.
-2. Pull the lever.
-3. Enjoy the randomly selected sound!
+1. Turn up your speakers or put on your headphones (at your own risk! 😄).
+2. Pull the lever to spin the reels.
+3. A random sound will be selected and played.
+4. Earn coins based on the selected sound—the rarer the sound, the higher the potential reward.
+5. Check the **Sound Values** dropdown to see each sound's coin payout and rarity before your next spin.
+6. Keep spinning to collect coins and discover the rarest sounds!
+
 
 ## Project Structure
 
