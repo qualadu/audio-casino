@@ -2,28 +2,69 @@
  * Auswahl der Audiodateien.
  * Neue Sounds hinzufügen: Datei in den Ordner "audio/" legen
  * und hier einen weiteren Eintrag ergänzen.
- *   file  -> Pfad relativ zu index.html
- *   label -> Text, der im Anzeigefeld erscheint
- *   symbol -> Emoji/Zeichen für die Walzen
  */
 const SOUND_LIBRARY = [
-  /* ##Testlibrary
-  { file: "audio/testlib/jackpot.wav",    label: "Jackpot!",        symbol: "⚡" },
-  { file: "audio/testlib/muenzregen.wav", label: "Münzregen",       symbol: "🥤" },
-  { file: "audio/testlib/glocke.wav",     label: "Glocke",          symbol: "🧊" },
-  { file: "audio/testlib/applaus.wav",    label: "Applaus",         symbol: "❄️" },
-  { file: "audio/testlib/niete.wav",      label: "Nochmal!",        symbol: "🔋" },
-  */
-  { file: "https://www.fahrschule-alfonso.ch/wp-content/uploads/2026/07/bruahh_brrrh.mp3",      label: "🫧🫧🫧🫧",        symbol: "🫧" },
-  { file: "https://www.fahrschule-alfonso.ch/wp-content/uploads/2026/07/bruahhh.mp3",           label: "🦴🦴🦴🦴",        symbol: "🦴" },
-  { file: "https://www.fahrschule-alfonso.ch/wp-content/uploads/2026/07/chuhhp.mp3",            label: "🐽🐽🐽🐽",        symbol: "🐽" },
-  { file: "https://www.fahrschule-alfonso.ch/wp-content/uploads/2026/07/huachp.mp3",            label: "😼😼😼😼",        symbol: "😼" },
-  { file: "https://www.fahrschule-alfonso.ch/wp-content/uploads/2026/07/luuhhp.mp3",            label: "👣👣👣👣",        symbol: "👣" },
-  { file: "https://www.fahrschule-alfonso.ch/wp-content/uploads/2026/07/phuph.mp3",             label: "💨💨💨💨",        symbol: "💨" },
+  { file: "https://www.fahrschule-alfonso.ch/wp-content/uploads/2026/07/bruahh_brrrh.mp3", label: "🫧🫧🫧🫧", symbol: "🫧", coins: 20 },
+  { file: "https://www.fahrschule-alfonso.ch/wp-content/uploads/2026/07/bruahhh.mp3", label: "🦴🦴🦴🦴", symbol: "🦴", coins: 10 },
+  { file: "https://www.fahrschule-alfonso.ch/wp-content/uploads/2026/07/chuhhp.mp3", label: "🐽🐽🐽🐽", symbol: "🐽", coins: 5 },
+  { file: "https://www.fahrschule-alfonso.ch/wp-content/uploads/2026/07/huachp.mp3", label: "😼😼😼😼", symbol: "😼", coins: 0 },
+  { file: "https://www.fahrschule-alfonso.ch/wp-content/uploads/2026/07/luuhhp.mp3", label: "👣👣👣👣", symbol: "👣", coins: 15 },
+  { file: "https://www.fahrschule-alfonso.ch/wp-content/uploads/2026/07/phuph.mp3", label: "💨💨💨💨", symbol: "💨", coins: 0 },
 ];
 
+// === Coins System ===
+let balance = 10;
+
+function getBalanceElement() {
+  return document.getElementById("balance");
+}
+
+function updateBalanceDisplay() {
+  const el = document.getElementById("balance");
+  if (el) el.textContent = `${balance} 🪙`;
+  updateCostIndicator();
+  updateLeverState();
+}
+
+function updateCostIndicator() {
+  const indicator = document.getElementById("costIndicator");
+  if (!indicator) return;
+  if (balance < 5) {
+    indicator.classList.add("low-coins");
+    indicator.querySelector(".cost-text").innerHTML = `Not enough Coins! <strong>5 🪙</strong> needed`;
+  } else {
+    indicator.classList.remove("low-coins");
+    indicator.querySelector(".cost-text").innerHTML = `Spin for <strong>5 🪙</strong>`;
+  }
+}
+
+function updateLeverState() {
+  const lever = document.getElementById("leverBtn");
+  if (lever) {
+    lever.classList.toggle("disabled", balance < 5);
+    lever.disabled = balance < 5;
+  }
+}
+
+function deductSpinCost() {
+  balance -= 5;
+  updateBalanceDisplay();
+}
+
+function addWinCoins(sound) {
+  balance += sound.coins || 0;
+  updateBalanceDisplay();
+  
+  const readout = document.getElementById("readout");
+  readout.style.transition = "color 0.3s";
+  readout.style.color = "#ffd700";
+  setTimeout(() => {
+    readout.style.color = "var(--accent)";
+  }, 1200);
+}
+
+// === DOM Elemente ===
 const leverBtn   = document.getElementById("leverBtn");
-const leverArm   = document.getElementById("leverArm");
 const readout    = document.getElementById("readout");
 const reels      = [
   document.getElementById("reel1"),
@@ -33,7 +74,7 @@ const reels      = [
 
 const START_COMBINATION = ["6️⃣", "7️⃣", "⁶🤷‍♂️⁷"];
 
-// Pool an Fuellsymbolen, die waehrend des Drehens durchs Fenster laufen
+// === Reel Funktionen ===
 function reelSymbolPool() {
   return SOUND_LIBRARY.map((s) => s.symbol).concat(["6️⃣", "⚅", "7️⃣", "⁶🤷‍♂️⁷"]);
 }
@@ -52,17 +93,10 @@ function initReels() {
   });
 }
 
-/**
- * Baut einen Symbol-Streifen fuer eine Walze und laesst ihn nach oben
- * durchlaufen, bis er auf finalSymbol abbremst - wie bei einer echten
- * Slot-Machine (deceleration statt reinem loop).
- */
 function spinReel(reel, finalSymbol, duration) {
   const strip = reel.querySelector(".reel-strip");
   const itemHeight = reel.clientHeight;
   const pool = reelSymbolPool();
-
-  // genug Zufallssymbole, damit die Walze mehrfach "umlaeuft"
   const fillerCount = 22;
 
   strip.style.transition = "none";
@@ -85,40 +119,16 @@ function spinReel(reel, finalSymbol, duration) {
   const totalItems = fillerCount + 1;
   const targetY = -(itemHeight * (totalItems - 1));
 
-  // Reflow erzwingen, damit der Browser die Ausgangsposition (0px) einmal
-  // gerendert hat, bevor der eigentliche "Lauf" per Transition startet
   strip.offsetHeight;
-
   requestAnimationFrame(() => {
     strip.style.transition = `transform ${duration}ms cubic-bezier(0.15, 0.85, 0.32, 1)`;
     strip.style.transform = `translateY(${targetY}px)`;
   });
 }
 
+// === Lichterkette ===
 const bulbRow = document.getElementById("bulbRow");
-
-// Lichterkette erzeugen
-/* alte Lichterketten erzeugung
 const bulbs = [];
-
-function buildBulbs() {
-  bulbRow.innerHTML = "";
-  bulbs.length = 0;
-
-  const count = getBulbCount();
-
-  for (let i = 0; i < count; i++) {
-    const b = document.createElement("span");
-    b.className = "bulb";
-    bulbRow.appendChild(b);
-    bulbs.push(b);
-  }
-}*/
-
-//neue Erzeugung
-
-const bulbs = [];
-
 const BULB_SIZE = 10;
 const BULB_MIN_GAP = 6;
 
@@ -129,28 +139,21 @@ function calcBulbCount(width) {
 function buildBulbs() {
   const width = bulbRow.getBoundingClientRect().width;
   const count = Math.max(8, calcBulbCount(width));
-
   bulbRow.innerHTML = "";
   bulbs.length = 0;
-
   const frag = document.createDocumentFragment();
-
   for (let i = 0; i < count; i++) {
     const b = document.createElement("span");
     b.className = "bulb";
     frag.appendChild(b);
     bulbs.push(b);
   }
-
   bulbRow.appendChild(frag);
 }
 
 buildBulbs();
 
-const resizeObserver = new ResizeObserver(() => {
-  buildBulbs();
-});
-
+const resizeObserver = new ResizeObserver(() => buildBulbs());
 resizeObserver.observe(document.body);
 
 window.addEventListener("resize", () => {
@@ -161,9 +164,28 @@ window.addEventListener("resize", () => {
 let isSpinning = false;
 let bulbTimer = null;
 
+// === Gewichtete Zufallsauswahl ===
 function randomSound() {
-  const i = Math.floor(Math.random() * SOUND_LIBRARY.length);
-  return SOUND_LIBRARY[i];
+  if (SOUND_LIBRARY.length === 0) return SOUND_LIBRARY[0];
+
+  const groups = {
+    zero: SOUND_LIBRARY.filter(s => s.coins === 0),
+    low: SOUND_LIBRARY.filter(s => s.coins >= 1 && s.coins <= 10),
+    medium: SOUND_LIBRARY.filter(s => s.coins >= 11 && s.coins <= 15),
+    high: SOUND_LIBRARY.filter(s => s.coins >= 16)
+  };
+
+  const rand = Math.random() * 100;
+
+  let selectedGroup;
+  if (rand < 40) selectedGroup = groups.zero;
+  else if (rand < 70) selectedGroup = groups.low;
+  else if (rand < 90) selectedGroup = groups.medium;
+  else selectedGroup = groups.high;
+
+  if (selectedGroup.length === 0) selectedGroup = SOUND_LIBRARY;
+
+  return selectedGroup[Math.floor(Math.random() * selectedGroup.length)];
 }
 
 function randomSymbolExcept() {
@@ -193,8 +215,10 @@ function stopLightsSettled() {
 }
 
 function pullLever() {
-  if (isSpinning) return;
+  if (isSpinning || balance < 5) return;
+
   isSpinning = true;
+  deductSpinCost();
 
   const chosen = randomSound();
 
@@ -202,11 +226,8 @@ function pullLever() {
   chaseLights(true);
   readout.textContent = "Dreht …";
 
-  // Hebel geht nach kurzer Zeit wieder in Ruheposition zurueck
   setTimeout(() => leverBtn.classList.remove("pulled"), 380);
 
-  // Walzen laufen lassen, dann auf dem gewaehlten Symbol stoppen -
-  // jede Walze etwas laenger als die vorherige, wie am echten Automaten
   const spinDuration = 1100;
   const stopDelays = [spinDuration, spinDuration + 220, spinDuration + 440];
 
@@ -230,13 +251,15 @@ function pullLever() {
 
     const audio = new Audio(chosen.file);
     audio.play().catch(() => {
-      readout.textContent = chosen.label + " (Audio blockiert – bitte Seite anklicken)";
+      readout.textContent = chosen.label + " (Audio blockiert)";
     });
 
+    addWinCoins(chosen);
     isSpinning = false;
   }, stopDelays[2] + 150);
 }
 
+// Event Listener
 leverBtn.addEventListener("click", pullLever);
 leverBtn.addEventListener("keydown", (e) => {
   if (e.key === " " || e.key === "Enter") {
@@ -245,4 +268,7 @@ leverBtn.addEventListener("keydown", (e) => {
   }
 });
 
-window.addEventListener("DOMContentLoaded", initReels);
+window.addEventListener("DOMContentLoaded", () => {
+  initReels();
+  updateBalanceDisplay();
+});
