@@ -11,21 +11,40 @@
 </head>
 <body>
 
+  <header class="top-bar">
+  <div class="balance" id="balance">10 🪙</div>
+  
+  <div class="info-dropdown">
+    <button class="dropdown-btn">Sound Payoffs</button>
+    <div class="dropdown-content" id="soundList"></div>
+  </div>
+  </header>
+
   <div class="bulb-row" id="bulbRow" aria-hidden="true"></div>
 
   <main class="stage">
-    <h1 class="marquee">SOUND GAMBLING</h1>
+    <h1 class="marquee">SOUND CASINO</h1>
     <p class="subtitle">Was sind das wohl für sounds?</p>
 
     <div class="bottom-panel">
       <div class="cabinet">
-        <div class="cabinet-plate">
-          <div class="reel-window" id="reelWindow" aria-live="polite">
-            <div class="reel" id="reel1"><div class="reel-strip"><span>&#9889;</span></div></div>
-            <div class="reel" id="reel2"><div class="reel-strip"><span>&#129544;</span></div></div>
-            <div class="reel" id="reel3"><div class="reel-strip"><span>&#10052;&#65039;</span></div></div>
+        <!-- Linker Bereich: Cost + Slots -->
+        <div class="left-slot-area">
+          <!-- Cost Indicator direkt über den Walzen -->
+          <div class="cost-container">
+            <div class="cost-indicator" id="costIndicator">
+              <span class="cost-text">Spin for <strong>5 🪙</strong></span>
+            </div>
           </div>
-          <p class="readout" id="readout">Bereit</p>
+        
+          <div class="cabinet-plate">
+            <div class="reel-window" id="reelWindow" aria-live="polite">
+              <div class="reel" id="reel1"><div class="reel-strip"><span>&#9889;</span></div></div>
+              <div class="reel" id="reel2"><div class="reel-strip"><span>&#129544;</span></div></div>
+              <div class="reel" id="reel3"><div class="reel-strip"><span>&#10052;&#65039;</span></div></div>
+            </div>
+            <p class="readout" id="readout">Bereit</p>
+          </div>
         </div>
 
         <button class="lever-assembly" id="leverBtn" type="button" aria-label="Hebel ziehen, um einen zuf&auml;lligen Sound abzuspielen">
@@ -37,10 +56,55 @@
         </button>
       </div>
 
-      <p class="hint">Probiers doch 6 - 7 mol us ⁶🤷‍♂️⁷</p>
+      <p class="hint">Test 12 Version 2.3</p>
     </div>
   </main>
 
   <script src="js/script.js"></script>
+
+  <!-- === Coins-Dropdown Script === -->
+  <script>
+    function buildSoundList() {
+      const container = document.getElementById("soundList");
+      container.innerHTML = "<h3>Sound Payoffs</h3>";
+     
+      const sortedSounds = [...SOUND_LIBRARY].sort((a, b) => b.coins - a.coins);
+
+      sortedSounds.forEach(s => {
+        const div = document.createElement("div");
+        div.className = "sound-entry";
+        div.innerHTML = `${s.symbol} ${s.label} <span class="coin-value">+${s.coins} 🪙</span>`;
+        container.appendChild(div);
+      });
+    }
+
+    function toggleDropdown(e) {
+      e.stopImmediatePropagation(); // verhindert Probleme mit mehreren Events
+      const dropdown = document.querySelector('.info-dropdown');
+      dropdown.classList.toggle('active');
+    }
+
+    // Schließen wenn außerhalb geklickt wird
+    function closeDropdownOnOutsideClick(e) {
+      const dropdown = document.querySelector('.info-dropdown');
+      if (!dropdown.contains(e.target)) {
+        dropdown.classList.remove('active');
+      }
+    }
+
+    window.addEventListener("DOMContentLoaded", () => {
+      initReels();
+      updateBalanceDisplay();
+      buildSoundList();
+
+      const dropdownBtn = document.querySelector('.dropdown-btn');
+      if (dropdownBtn) {
+        dropdownBtn.addEventListener('click', toggleDropdown);
+      }
+
+      // Klick außerhalb schließt das Menü
+      document.addEventListener('click', closeDropdownOnOutsideClick);
+    });
+  </script>
 </body>
 </html>
