@@ -116,20 +116,30 @@ body {
 .cabinet {
   position: relative;
   width: 100%;
-  background:
-    linear-gradient(180deg, #4c5a63 0%, var(--steel) 55%, var(--steel-dark) 100%);
+  background: linear-gradient(180deg, #4c5a63 0%, var(--steel) 55%, var(--steel-dark) 100%);
   border-radius: 22px;
   padding: 1.6rem 1.6rem 2.4rem;
-  box-shadow:
+  box-shadow: 
     0 20px 45px rgba(0, 0, 0, 0.55),
     inset 0 0 0 3px rgba(95, 214, 255, 0.55),
     inset 0 0 0 6px rgba(0, 0, 0, 0.3);
+  
   display: flex;
-  align-items: flex-end;
-  gap: 1.2rem;
+  align-items: flex;          /* zentriert */
+  gap: 1.2rem;                  /* Abstand zwischen Elementen */
+}
+
+/* Linker Block: Cost + Slots (gestapelt, gleiche Breite) */
+.left-slot-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;                     /* nimmt den verfügbaren Platz */
+  min-width: 0;
 }
 
 .cabinet-plate {
+  width: 100%;
   flex: 1;
   background: var(--deep);
   border-radius: 14px;
@@ -228,7 +238,15 @@ body {
   border: none;
   padding: 0;
   cursor: pointer;
+  margin-top: 2.2rem;
   -webkit-tap-highlight-color: transparent;
+}
+
+@media (max-width: 420px) {
+  .lever-assembly {
+    margin-top: 1.8rem;        /* kleinerer Wert auf Handy */
+    height: 170px;
+  }
 }
 
 .lever-assembly:focus-visible {
@@ -307,4 +325,139 @@ body {
   .lever-arm, .bulb-row .bulb { transition: none; }
   .reel-strip { transition: none !important; filter: none !important; }
   .reel.bounce { animation: none; }
+}
+
+/* Top Bar */
+.top-bar {
+  width: 100vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.8rem 1rem;
+  background: rgba(11, 17, 20, 0.85);
+  border-bottom: 2px solid var(--accent);
+  z-index: 10;
+}
+
+.balance {
+  font-family: var(--font-condensed);
+  font-size: 1.35rem;
+  color: #ffd700;
+  text-shadow: 0 0 8px rgba(255, 215, 0, 0.6);
+}
+
+/* Verbessertes Dropdown Design */
+.info-dropdown {
+  position: relative;
+}
+
+.dropdown-btn {
+  background: var(--steel);
+  color: var(--paper);
+  border: 2px solid var(--accent);
+  padding: 0.45rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: all 0.2s;
+  user-select: none;
+}
+
+.dropdown-btn:hover {
+  background: var(--accent);
+  color: var(--deep);
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 110%;
+  background: rgba(11, 17, 20, 0.98);
+  border: 2px solid var(--accent);
+  border-radius: 10px;
+  padding: 1.1rem 1.2rem;
+  width: 280px;
+  box-shadow: 0 12px 35px rgba(0,0,0,0.75);
+  z-index: 30;
+  margin-top: 6px;
+}
+
+.info-dropdown.active .dropdown-content {
+  display: block;
+}
+
+.dropdown-content h3 {
+  margin: 0 0 0.9rem 0;
+  color: var(--accent);
+  font-size: 1.05rem;
+  text-align: center;
+  border-bottom: 1px solid rgba(95, 214, 255, 0.3);
+  padding-bottom: 0.6rem;
+}
+
+.sound-entry {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.55rem 0.4rem;
+  border-bottom: 1px solid rgba(95, 214, 255, 0.15);
+  font-size: 1rem;
+}
+
+.sound-entry:last-child {
+  border-bottom: none;
+}
+
+.coin-value {
+  color: #ffd700;
+  font-weight: 700;
+  margin-left: 12px;
+  flex-shrink: 0;
+}
+
+.dropdown-btn::after {
+  content: " ▼";
+  margin-left: 8px;
+  transition: transform 0.25s ease;
+}
+
+/* Cost Container - oben im äußeren Automaten-Bereich */
+/* === Cost Indicator - besser positioniert === */
+.cost-container {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 1.1rem;   /* etwas weniger Abstand nach unten */
+  padding: 0;
+}
+
+.cost-indicator {
+  width: 100%;
+  display: inline-block;
+  padding: 0.7rem 1.8rem;
+  background: rgba(255, 215, 0, 0.18);
+  border: 2px solid #ffd700;
+  border-radius: 14px;
+  font-family: var(--font-condensed);
+  font-size: 1.25rem;
+  color: #ffeb99;
+  box-shadow: 0 0 18px rgba(255, 215, 0, 0.55);
+  transition: all 0.3s ease;
+}
+
+.cost-indicator strong {
+  color: #ffd700;
+  font-size: 1.4rem;
+}
+
+.cost-indicator.low-coins {
+  background: rgba(255, 80, 80, 0.28);
+  border-color: #ff6666;
+  color: #ffbbbb;
+  animation: lowCoinsPulse 1.2s infinite;
+}
+
+@keyframes lowCoinsPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(0.97); }
 }
