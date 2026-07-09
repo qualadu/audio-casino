@@ -68,6 +68,7 @@ The source code may be freely used, modified, and incorporated into your own pro
 > Audio files (including MP3 files and externally sourced audio referenced in SOUND_LIBRARY) are not covered by this permission. Unless explicitly stated otherwise, they remain the property of their respective copyright holders and may not be redistributed, modified, or included in third-party projects without permission.
 
 ## Version History
+
 ### Version 2.3
 ### Gameplay
 - Introduced a **coin system**, allowing every sound to award a configurable number of coins.
