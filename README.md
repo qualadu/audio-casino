@@ -1,5 +1,5 @@
 # 🎰 Audio Casino 
-> Current Version: **2.2**
+> Current Version: **2.3**
 
 An interactive slot machine that plays a random audio clip every time you pull the lever.
 
@@ -68,6 +68,23 @@ The source code may be freely used, modified, and incorporated into your own pro
 > Audio files (including MP3 files and externally sourced audio referenced in SOUND_LIBRARY) are not covered by this permission. Unless explicitly stated otherwise, they remain the property of their respective copyright holders and may not be redistributed, modified, or included in third-party projects without permission.
 
 ## Version History
+### Version 2.3
+### Gameplay
+- Introduced a **coin system**, allowing every sound to award a configurable number of coins.
+- Sounds can now have different payout values, making some outcomes more rewarding than others.
+### Balancing
+- Added adjustable **rarity (weighting)** for every sound.
+- Rare sounds can now be assigned higher coin rewards, while common sounds appear more frequently with lower payouts.
+- This creates a more authentic slot machine experience by balancing risk and reward.
+### User Interface
+- Added a dropdown menu displaying the **coin value** associated with each available sound.
+- Players can view the reward values before spinning, making the odds and payouts more transparent.
+### JavaScript
+- Expanded the `SOUND_LIBRARY` structure to support additional properties such as **coin value** and **spawn probability**.
+- Updated the random selection algorithm to respect configurable rarity values instead of giving every sound an equal chance.
+- Implemented the core logic for tracking and awarding coins after each spin.
+
+
 ### Version 2.2
 #### Improvements:
 - Added responsive scaling so the slot machine automatically adapts to different screen sizes and device resolutions.
